@@ -1,10 +1,10 @@
-# How to work with Google spreadsheet
+## How to work with Google spreadsheet
 
-## Folder {/Read_SQL_to_sheet/}  -> example how to [Automatically Retrieve SQL Data to Sheet](https://www.actiondesk.io/blog/google-sheets-script-to-automatically-retrieve-sql-data)
+### Folder {/Read_SQL_to_sheet/}  -> example how to [Automatically Retrieve SQL Data to Sheet](https://www.actiondesk.io/blog/google-sheets-script-to-automatically-retrieve-sql-data)
 
-## {/working.php} -> example how to get Sheet rows to JS via AJAX
+### {/working.php} -> example how to get Sheet rows to JS via AJAX
 
-## {/workingphp.php} -> example how to get Sheet rows to php via file_get_contents(), (and then do whatever you want, i.e save to SQL)
+### {/workingphp.php} -> example how to get Sheet rows to php via file_get_contents(), (and then do whatever you want, i.e save to SQL)
 
 
 
