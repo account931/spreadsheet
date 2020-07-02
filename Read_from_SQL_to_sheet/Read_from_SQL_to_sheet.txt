@@ -1,0 +1,53 @@
+//https://www.actiondesk.io/blog/google-sheets-script-to-automatically-retrieve-sql-data
+
+//Google Sheet -> Tool -> Script Editor
+// In Script Editor: Run -> Run Function -> functionName to run
+
+//below is the code to insert in Script Editor
+
+var server = 'localhost';
+var port = 3306;
+var dbName = 'yii2_support_db_and_dayBook';
+var username = 'root';
+var password = '';
+var url = 'jdbc:mysql://'+server+':'+port+'/'+dbName;
+
+
+
+
+function readData() {
+  var conn = Jdbc.getConnection(url, username, password);
+  var stmt = conn.createStatement();
+  var results = stmt.executeQuery('SELECT * FROM supportData');
+  var metaData=results.getMetaData();
+  var numCols = metaData.getColumnCount();
+  var spreadsheet = SpreadsheetApp.getActive();
+  var sheet = spreadsheet.getSheetByName('my_sheets-script-to-automatically-retrieve-sql-data');
+  sheet.clearContents();
+  var arr=[];
+
+  for (var col = 0; col < numCols; col++) {
+    arr.push(metaData.getColumnName(col + 1));
+  }
+
+  sheet.appendRow(arr);
+
+while (results.next()) {
+  arr=[];
+  for (var col = 0; col < numCols; col++) {
+    arr.push(results.getString(col + 1));
+  }
+  sheet.appendRow(arr);
+}
+
+results.close();
+stmt.close();
+sheet.autoResizeColumns(1, numCols+1);
+}
+
+
+//run every 1 minute
+ScriptApp.newTrigger('readData')
+  .timeBased()
+  .everyMinutes(1)
+  .create();
